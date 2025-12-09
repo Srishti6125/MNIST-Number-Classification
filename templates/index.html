@@ -1,1 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MNIST Digit Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 
+<body>
+<div class="page">
+
+    <!-- Top header spanning full width -->
+    <header class="page-header">
+        <div>
+            <h1 class="page-title">MNIST Digit Classifier</h1>
+            <p class="page-subtitle">
+                <i>Upload your digit and watch the AI model instantly recognize and classify it.</i>
+            </p>
+        </div>
+        <div class="stack-badges">
+            <span class="tech-pill">CNN</span>
+        </div>
+    </header>
+
+    <!-- Two-column layout -->
+    <main class="layout">
+
+        <!-- LEFT: Upload + action -->
+        <section class="card left-card">
+            <form method="POST" enctype="multipart/form-data">
+
+                <div class="section-title">Input Image</div>
+                <p class="section-subtitle">
+                    Upload a clear, centered digit on a simple background for best results.
+                </p>
+
+                <div class="upload-zone">
+                    <label class="file-label">
+                        <span class="icon">↑</span>
+                        <span>Upload Image</span>
+                        <input type="file" name="file" accept="image/*"
+                               onchange="previewImage(event)" required>
+                    </label>
+
+                    <div class="upload-hint">
+                        Accepts JPG / PNG &nbsp;·&nbsp; Recommended: 28×28 or larger centered digit
+                    </div>
+
+                    <!-- Preview card: visible after selection (JS) or after prediction (server) -->
+                    <div id="preview-container"
+                        class="preview-card {% if image_data %}preview-show{% endif %}">
+                        <div class="preview-img">
+                            {% if image_data %}
+                                <img id="preview-img"
+                                    src="data:image/png;base64,{{ image_data }}"
+                                    alt="preview">
+                            {% else %}
+                                <img id="preview-img" alt="preview">
+                            {% endif %}
+                        </div>
+                        <div class="preview-info">
+                            <div class="preview-info-title">Selected file</div>
+                            <div class="preview-info-name" id="preview-filename">
+                                {{ image_name if image_name else 'image.png' }}
+                            </div>
+                        </div>
+                    </div>
+
+                {% if error %}
+                    <div class="error-msg">{{ error }}</div>
+                {% endif %}
+
+                <div class="actions">
+                    <button type="submit" class="primary-btn">
+                        🔍 Predict Digit
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- RIGHT: Prediction + probabilities stack -->
+        <section class="right-column">
+
+            <!-- Prediction card -->
+            <div class="card prediction-card">
+                <div class="section-title">Prediction</div>
+
+                {% if prediction is not none %}
+                    <div class="prediction-value">{{ prediction }}</div>
+                {% else %}
+                    <div class="prediction-placeholder">
+                        No prediction yet.<br>
+                        Upload an image on the left and click <strong>Predict Digit</strong>.
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Probabilities card -->
+            <div class="card probs-card">
+                <div class="section-title">Class Probabilities</div>
+
+                {% if probs %}
+                    <div class="prob-list">
+                        {% for digit, prob in probs %}
+                            <div class="prob-row">
+                                <span class="prob-label-digit">{{ digit }}</span>
+                                <div class="prob-bar-container">
+                                    <div class="prob-bar" data-width="{{ prob * 100 }}"></div>
+                                </div>
+                                <span class="prob-percent">
+                                    {{ "%.1f"|format(prob * 100) }}%
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="prob-placeholder">
+                        Class-wise confidence will appear here after prediction.
+                    </div>
+                {% endif %}
+            </div>
+
+            <footer class="page-footer">
+                Built with TensorFlow / Keras · CNN · Flask
+            </footer>
+        </section>
+
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
