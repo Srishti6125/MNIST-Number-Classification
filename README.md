@@ -7,7 +7,7 @@
 
 Add your UI screenshot here:
 
-![App Preview]()
+![App Preview](preview.png)
 
 ---
 
