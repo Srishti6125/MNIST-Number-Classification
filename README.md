@@ -11,7 +11,7 @@ Users can upload a digit image and instantly receive:
 
 - 🎯 The predicted digit (0–9)  
 - 📊 Full probability distribution  
-- 🖼️ A preview of the uploaded image (both before and after prediction)
+- 🖼️ A preview of the uploaded image
 
 The user interface features a clean, modern two-column layout with gradients, animations, and soft glow effects for a premium experience.
 
@@ -49,7 +49,7 @@ The UI includes:
 
 ## 🌐 Web App Link
 
-live deployed link : https://your-mnist-classifier-webapp-link.com
+live deployed link : 
 
 ---
 
