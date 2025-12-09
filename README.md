@@ -3,6 +3,14 @@
 
 ---
 
+## 🖼️ Project Preview
+
+Add your UI screenshot here:
+
+![App Preview]()
+
+---
+
 ## 🌟 Overview
 
 This project is an interactive handwritten digit classification web application built on the MNIST dataset.
@@ -44,12 +52,6 @@ The UI includes:
 - 📊 Animated probability bars  
 - 🧩 Minimal and intuitive structure  
 - ✨ A polished, futuristic visual style  
-
----
-
-## 🌐 Web App Link
-
-live deployed link : 
 
 ---
 
