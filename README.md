@@ -5,8 +5,6 @@
 
 ## 🖼️ Project Preview
 
-Add your UI screenshot here:
-
 ![App Preview](preview.png)
 
 ---
